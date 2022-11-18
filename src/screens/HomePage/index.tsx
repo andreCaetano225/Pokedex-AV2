@@ -1,8 +1,21 @@
-import { Button, Image, ImageBackground } from 'react-native';
-import { ButtonLink, Container, InputUser, TitleLink } from './styles';
+import { useState } from 'react'
+import { Image, ImageBackground } from 'react-native';
+import { Button } from '../../components/Button';
+import { useNavigation } from '@react-navigation/native'
+import { Container, InputUser, } from './styles';
 
 
 export function HomePage() {
+
+    const [user, setUser] = useState('')
+
+    const navigation = useNavigation();
+
+    function handleNewPokedex() {
+        navigation.navigate('pokemonSelect', { user })
+        setUser('')
+    }
+
     return (
         <>
             <ImageBackground
@@ -14,13 +27,15 @@ export function HomePage() {
                         style={{ marginTop: 22 }}
                     />
 
-                    <InputUser placeholder='Nome de invocador' />
+                    <InputUser
+                        placeholder='Nome de treinador'
+                        onChangeText={setUser}
+                        value={user}
+                    />
 
-                    <ButtonLink>
-                        <TitleLink>
-                            Entrar pokédex
-                        </TitleLink>
-                    </ButtonLink>
+                    <Button
+                        onPress={handleNewPokedex}
+                    />
 
                 </Container>
             </ImageBackground>

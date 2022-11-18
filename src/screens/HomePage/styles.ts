@@ -1,7 +1,8 @@
 import styled from "styled-components/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
-export const Container = styled.View`
+export const Container = styled(SafeAreaView)`
     flex: 1;
     color: #fff;
     align-items: center;
@@ -16,21 +17,4 @@ export const InputUser = styled.TextInput`
     padding-left: 10px;
     margin-top: 10px;
 
-`;
-
-export const ButtonLink = styled.View`
-    width: 198px;
-    height: 49px;
-    background: #FFE031;
-    border-radius: 15px;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-
-    
-`;
-
-export const TitleLink = styled.Text`
-    color: #000;
-    font-size: 16px;
 `;

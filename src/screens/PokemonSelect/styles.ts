@@ -1,7 +1,18 @@
 import styled from "styled-components/native"
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
-export const Container = styled.View`
+
+export const TextWelcome = styled.Text`
+
+    align-items: center;
+    margin-top: 40px;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+`;
+
+export const Container = styled(SafeAreaView)`
 
     flex: 1;
     flex-direction: row;
@@ -11,13 +22,11 @@ export const Container = styled.View`
 `;
 
 
-export const ContainerFlexSearch = styled.View`
+export const ContainerFlexSearch = styled(SafeAreaView)`
 
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    margin-top: 190px;
 
 
 `

@@ -12,6 +12,7 @@ export const Container = styled.View`
     background-color: #FFF;
 
 
+
 `;
 
 export const ItensList = styled.View`
@@ -22,6 +23,11 @@ export const ItensList = styled.View`
 
     border: 1px solid #000;
     border-radius: 15px;
+
+    margin-top: 10px;
+
+    flex-direction: column;
+    justify-content: center;
 
 `;
 

@@ -12,6 +12,21 @@ export function ListPokemon() {
                         Pikachu
                     </TextName>
                 </ItensList>
+                <ItensList>
+                    <TextName>
+                        Pikachu
+                    </TextName>
+                </ItensList>
+                <ItensList>
+                    <TextName>
+                        Pikachu
+                    </TextName>
+                </ItensList>
+                <ItensList>
+                    <TextName>
+                        Pikachu
+                    </TextName>
+                </ItensList>
             </Container>
         </>
     )

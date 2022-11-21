@@ -24,12 +24,31 @@ export const Container = styled(SafeAreaView)`
 
 export const ContainerFlexSearch = styled(SafeAreaView)`
 
-    display: flex;
+    flex: 1;
     flex-direction: row;
     align-items: center;
 
+    margin-top: -220px;
+
 
 `
+export const ContainerImg = styled(SafeAreaView)`
+
+    align-items: center;
+    justify-content: center;
+
+    
+
+
+`;
+
+export const TextPokemon = styled.Text`
+
+    font-size: 18px;
+    color: #000;
+
+
+`;
 
 export const ButtonSubmit = styled.View`
 
@@ -62,7 +81,7 @@ export const InputSearch = styled.TextInput`
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
 
-    
+
     padding-left: 20px;
 
 `;

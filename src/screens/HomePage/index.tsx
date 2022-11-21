@@ -20,11 +20,14 @@ export function HomePage() {
         <>
             <ImageBackground
                 source={require("../../assets/backgroundHome.png")}
-                style={{ flex: 1 }}>
+                style={{ flex: 1 }}
+                resizeMode="stretch"
+            >
                 <Container>
                     <Image
                         source={require("../../assets/logo.png")}
                         style={{ marginTop: 22 }}
+                        resizeMode="stretch"
                     />
 
                     <InputUser

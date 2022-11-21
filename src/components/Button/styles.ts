@@ -1,24 +1,36 @@
 import styled from "styled-components/native";
 import { TouchableOpacity } from 'react-native'
 
+interface ButtonPropsColor {
+    backgroundColor: string;
+    marginTop: number;
 
-export const ContainerButton = styled(TouchableOpacity)`
+}
+
+interface ColorTextButton {
+    textColor: string;
+}
+
+
+export const ContainerButton = styled(TouchableOpacity) <ButtonPropsColor>`
 
     width: 198px;
     height: 49px;
 
-    background: #FFE031;
+    background:  ${(props) => props.backgroundColor};
 
     border-radius: 15px;
 
     align-items: center;
     justify-content: center;
 
-    margin-top: 20px;
+    margin-top: ${(props) => props.marginTop}px;
+
 `;
 
 
-export const TitleButton = styled.Text`
-    color: #000;
+export const TitleButton = styled.Text<ColorTextButton>`
     font-size: 16px;
+    color: ${(props) => props.textColor};
+
 `;

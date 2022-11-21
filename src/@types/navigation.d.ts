@@ -5,6 +5,7 @@ export declare global {
             pokemonSelect: {
                 user: string;
             };
+            ListPokemon: undefined;
         }
     }
 }

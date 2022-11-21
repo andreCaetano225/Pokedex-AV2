@@ -35,6 +35,10 @@ export function HomePage() {
 
                     <Button
                         onPress={handleNewPokedex}
+                        backGroundColor='#FFE031'
+                        marginTop={20}
+                        textColor='#000'
+                        titleButton='Entrar na pokédex'
                     />
 
                 </Container>

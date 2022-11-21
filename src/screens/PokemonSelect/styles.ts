@@ -15,7 +15,7 @@ export const TextWelcome = styled.Text`
 export const Container = styled(SafeAreaView)`
 
     flex: 1;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 
@@ -66,3 +66,4 @@ export const InputSearch = styled.TextInput`
     padding-left: 20px;
 
 `;
+

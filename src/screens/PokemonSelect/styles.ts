@@ -13,22 +13,19 @@ export const TextWelcome = styled.Text`
 `;
 
 export const Container = styled(SafeAreaView)`
-
-    flex: 1;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+
+    margin-top: -150px;
 
 `;
 
 
 export const ContainerFlexSearch = styled(SafeAreaView)`
 
-    flex: 1;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 
-    margin-top: -220px;
 
 
 `
@@ -37,18 +34,18 @@ export const ContainerImg = styled(SafeAreaView)`
     align-items: center;
     justify-content: center;
 
-    
-
-
 `;
 
 export const TextPokemon = styled.Text`
 
     font-size: 18px;
     color: #000;
+    margin-top: 170px;
 
 
 `;
+
+
 
 export const ButtonSubmit = styled.View`
 
@@ -85,4 +82,6 @@ export const InputSearch = styled.TextInput`
     padding-left: 20px;
 
 `;
+
+
 

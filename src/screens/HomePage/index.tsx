@@ -16,6 +16,7 @@ export function HomePage() {
         setUser('')
     }
 
+
     return (
         <>
             <ImageBackground
@@ -34,6 +35,7 @@ export function HomePage() {
                         placeholder='Nome de treinador'
                         onChangeText={setUser}
                         value={user}
+
                     />
 
                     <Button

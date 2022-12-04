@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native'
 import { api } from '../../services/api';
+import { pokemonCreate } from '../../storage/pokemon/pokemonCreate';
 
 
 interface RouteParams {
@@ -22,9 +23,16 @@ interface ApiResults {
         }
     }
 }
+
+console.log({
+    namePokemon: apiResults?.sprites?.other?.home?.front_default,
+    imgPokemon: apiResults?.name.toUpperCase(),
+})
+
 export function PokemonSelect() {
     const [apiResults, setApiResults] = useState<ApiResults>();
     const [valueInputPoke, setvalueInputPoke] = useState('');
+    const [pokemonSave, setPokemonSave] = useState<string>('');
 
     const [pressInput, setPressInput] = useState(false)
     const [buttonSave, setButtonSave] = useState(false)
@@ -36,22 +44,37 @@ export function PokemonSelect() {
     const { user } = route.params as RouteParams;
 
     useEffect(() => {
-    }, [apiResults])
+        setPokemonSave({
+            namePokemon: apiResults?.sprites?.other?.home?.front_default,
+            imgPokemon: apiResults?.name.toUpperCase(),
+        })
+    }, [apiResults, pressInput])
 
-    function handleNewPokedex() {
-        navigation.navigate('ListPokemon')
-    }
 
-    console.log(pressInput)
 
-    const saveNewPokemon = useCallback(() => {
+    const handleSearchPokemon = useCallback(() => {
+
         setPressInput(false)
-        setButtonSave(true)
-        api.get(`/${valueInputPoke.toLowerCase()}`).then((res) => setApiResults(res.data)).catch(e => console.log(e))
+        if (valueInputPoke == '') {
+            alert('Digite um número ou nome por favor!!')
+            Keyboard.dismiss()
+        } else {
+            api.get(`/${valueInputPoke.toLowerCase()}`).then((res) => setApiResults(res.data)).catch(e => console.log(e))
+            Keyboard.dismiss()
+            setButtonSave(true)
 
-        Keyboard.dismiss()
+        }
+
+
+
+
 
     }, [valueInputPoke, apiResults, buttonSave])
+
+    async function handleNewPokedex() {
+        await pokemonCreate(pokemonSave);
+        navigation.navigate('ListPokemon')
+    }
 
     const resetInput = useCallback(() => {
         setPressInput(true)
@@ -96,7 +119,7 @@ export function PokemonSelect() {
                     <ContainerFlexSearch>
                         <InputSearch placeholder='Digite um número ou nome' onChangeText={setvalueInputPoke} onPressIn={resetInput} />
                         <ButtonSubmit>
-                            <Icon name='search1' size={20} onPress={saveNewPokemon} />
+                            <Icon name='search1' size={20} onPress={handleSearchPokemon} />
                         </ButtonSubmit>
                     </ContainerFlexSearch>
 

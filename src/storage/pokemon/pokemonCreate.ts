@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { LISTPOKEMON_COLLECTION } from "../storageConfing";
 import { pokemonGetAll } from "./pokemonGetAll";
 
-export async function pokemonCreate(newPokemonSave: string) {
+export async function pokemonCreate(newPokemonSave: string[]) {
     try {
 
         const storedPokemons = await pokemonGetAll();

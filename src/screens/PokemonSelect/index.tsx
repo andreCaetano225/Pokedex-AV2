@@ -7,6 +7,7 @@ import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native'
 import { api } from '../../services/api';
 import { pokemonCreate } from '../../storage/pokemon/pokemonCreate';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 interface RouteParams {
@@ -24,15 +25,19 @@ interface ApiResults {
     }
 }
 
-console.log({
-    namePokemon: apiResults?.sprites?.other?.home?.front_default,
-    imgPokemon: apiResults?.name.toUpperCase(),
-})
+interface ItensPokemon {
+    namePokemon: string;
+    imgPokemon: string;
+
+}
+
 
 export function PokemonSelect() {
     const [apiResults, setApiResults] = useState<ApiResults>();
     const [valueInputPoke, setvalueInputPoke] = useState('');
-    const [pokemonSave, setPokemonSave] = useState<string>('');
+
+    const [pokemonSaveName, setPokemonSaveName] = useState<string>('');
+    const [pokemonSaveImg, setPokemonSaveImg] = useState<string>('');
 
     const [pressInput, setPressInput] = useState(false)
     const [buttonSave, setButtonSave] = useState(false)
@@ -44,10 +49,15 @@ export function PokemonSelect() {
     const { user } = route.params as RouteParams;
 
     useEffect(() => {
-        setPokemonSave({
-            namePokemon: apiResults?.sprites?.other?.home?.front_default,
-            imgPokemon: apiResults?.name.toUpperCase(),
-        })
+
+        if (valueInputPoke == '') {
+
+        } else[
+            api.get(`/${valueInputPoke.toLowerCase()}`).then((res) => setApiResults(res.data)).catch(e => console.log(e))
+        ]
+
+        setPokemonSaveName(`${apiResults?.name?.toUpperCase()}`)
+        setPokemonSaveImg(`${apiResults?.sprites?.other?.home?.front_default}`)
     }, [apiResults, pressInput])
 
 
@@ -59,20 +69,24 @@ export function PokemonSelect() {
             alert('Digite um número ou nome por favor!!')
             Keyboard.dismiss()
         } else {
-            api.get(`/${valueInputPoke.toLowerCase()}`).then((res) => setApiResults(res.data)).catch(e => console.log(e))
             Keyboard.dismiss()
             setButtonSave(true)
 
         }
 
 
-
-
-
     }, [valueInputPoke, apiResults, buttonSave])
 
     async function handleNewPokedex() {
-        await pokemonCreate(pokemonSave);
+
+        try {
+            await AsyncStorage.setItem('pokemon-name', JSON.stringify(pokemonSaveName))
+            await AsyncStorage.setItem('pokemon-img', JSON.stringify(pokemonSaveImg))
+
+        } catch (error) {
+            console.log(error)
+        }
+
         navigation.navigate('ListPokemon')
     }
 
@@ -99,7 +113,6 @@ export function PokemonSelect() {
                         (
                             <TextWelcome>
                                 Seja bem vindo {user}
-
                             </TextWelcome>
                         )}
                 </TextWelcome>

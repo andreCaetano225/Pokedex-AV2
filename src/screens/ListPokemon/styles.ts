@@ -1,15 +1,28 @@
 import styled from "styled-components/native";
 
+interface PropsTextName {
+    color: string;
+}
 
+export const IconStyles = styled.View`
+
+    width: 42px;
+    height: 42px;
+
+    margin-right: 340px;
+    margin-top: 40px;
+`;
 
 export const Container = styled.View`
 
     flex: 1;
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    background-color: #FFF;
+    margin-bottom: 140px;
+
 
 
 
@@ -17,26 +30,21 @@ export const Container = styled.View`
 
 export const ItensList = styled.View`
 
-    width: 300px;
-    height: 71px;
-
-
-    border: 1px solid #000;
-    border-radius: 15px;
-
-    margin-top: 10px;
-
-    flex-direction: column;
+    flex: 1;
     justify-content: center;
+    align-items: center;
 
 `;
 
 
-export const TextName = styled.Text`
+export const TextName = styled.Text<PropsTextName>`
 
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 500;
-    color: #000;
+    color: ${props => props.color};
+
+    margin-top: 40px;
+
 
 
 `;

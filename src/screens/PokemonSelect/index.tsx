@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native'
 import { api } from '../../services/api';
-import { pokemonCreate } from '../../storage/pokemon/pokemonCreate';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -58,7 +57,7 @@ export function PokemonSelect() {
 
         setPokemonSaveName(`${apiResults?.name?.toUpperCase()}`)
         setPokemonSaveImg(`${apiResults?.sprites?.other?.home?.front_default}`)
-    }, [apiResults, pressInput])
+    }, [apiResults, pressInput, valueInputPoke])
 
 
 
@@ -87,6 +86,13 @@ export function PokemonSelect() {
             console.log(error)
         }
 
+        navigation.navigate('ListPokemon')
+
+        setvalueInputPoke('')
+        setButtonSave(false)
+    }
+
+    function handleLinkPokeBola() {
         navigation.navigate('ListPokemon')
     }
 
@@ -119,7 +125,7 @@ export function PokemonSelect() {
                 <ContainerImg>
                     {pressInput ? (null) : (
                         <Image
-                            source={{ uri: `${apiResults?.sprites?.other?.home?.front_default}` }}
+                            source={{ uri: valueInputPoke == '' ? undefined : `${apiResults?.sprites?.other?.home?.front_default}` }}
                             style={{ width: 120, height: 120 }}
                         />)}
 
@@ -127,10 +133,10 @@ export function PokemonSelect() {
 
                 <Container>
                     <TextPokemon>
-                        {pressInput ? (null) : apiResults?.name.toUpperCase()}
+                        {pressInput ? (null) : valueInputPoke == '' ? ('') : apiResults?.name.toUpperCase()}
                     </TextPokemon>
                     <ContainerFlexSearch>
-                        <InputSearch placeholder='Digite um número ou nome' onChangeText={setvalueInputPoke} onPressIn={resetInput} />
+                        <InputSearch placeholder='Digite um número ou nome' onChangeText={setvalueInputPoke} onPressIn={resetInput} value={valueInputPoke} />
                         <ButtonSubmit>
                             <Icon name='search1' size={20} onPress={handleSearchPokemon} />
                         </ButtonSubmit>
@@ -142,12 +148,20 @@ export function PokemonSelect() {
                                 backGroundColor='#4052D9'
                                 marginTop={30}
                                 textColor='#FFF'
-                                titleButton='Salvar Pokemon'
+                                titleButton='Capturar Pokemon'
                                 onPress={handleNewPokedex}
                             />
                         )
                         :
-                        (null)}
+                        (<Button
+                            backGroundColor='#4052D9'
+                            marginTop={30}
+                            textColor='#FFF'
+                            titleButton='Visitar PokeBola'
+                            onPress={handleLinkPokeBola}
+                        />)}
+
+
                 </Container>
 
 

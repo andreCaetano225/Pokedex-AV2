@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState, useEffect } from 'react'
-import { Image } from 'react-native';
-import { pokemonGetAll } from "../../storage/pokemon/pokemonGetAll";
-import { Container, ItensList, TextName } from "./styles";
+import { Image, ImageBackground } from 'react-native';
+import { Container, IconStyles, ItensList, TextName } from "./styles";
+import Icon from 'react-native-vector-icons/Feather'
+import { useNavigation } from '@react-navigation/native';
 
 
 interface ItensPokemon {
@@ -16,6 +17,8 @@ export function ListPokemon() {
 
     const [pokemonNome, setPokemonNome] = useState()
     const [pokemonImg, setPokemonImg] = useState()
+
+    const navigation = useNavigation();
 
 
 
@@ -44,20 +47,39 @@ export function ListPokemon() {
 
     }, [pokemonNome, pokemonImg])
 
+    function handlePopTop() {
+        navigation.popToTop();
+    }
+
     return (
         <>
-            <Container>
+            <ImageBackground
+                source={require("../../assets/pokebola.png")}
+                style={{ flex: 1, alignItems: 'center' }}
+                resizeMode="stretch"
+            >
+                <IconStyles>
 
-                <ItensList>
+                    <Icon name='arrow-left' size={40} onPress={handlePopTop} />
+                </IconStyles>
+                <Container>
+
+                    <TextName color="#FFF">
+                        Sua Poke Bola
+                    </TextName>
                     <Image
                         source={{ uri: `${pokemonImg}` }}
-                        style={{ width: 120, height: 120 }}
+                        style={{ width: 220, height: 220 }}
                     />
-                    <TextName>
+
+                    <TextName color="#000">
                         {pokemonNome}
                     </TextName>
-                </ItensList>
-            </Container>
+
+                </Container>
+
+            </ImageBackground>
+
         </>
     )
 }

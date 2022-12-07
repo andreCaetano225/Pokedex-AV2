@@ -111,11 +111,11 @@ export function PokemonSelect() {
         setButtonSave(false)
     }
 
-    async function handleLogOut() {
-        await AsyncStorage.removeItem('@user');
-        await AsyncStorage.removeItem('pokemon-name');
-        await AsyncStorage.removeItem('pokemon-img');
-    }
+    // async function handleLogOut() {
+    //     await AsyncStorage.removeItem('@user');
+    //     await AsyncStorage.removeItem('pokemon-name');
+    //     await AsyncStorage.removeItem('pokemon-img');
+    // }
 
     function handleLinkPokeBola() {
         navigation.navigate('ListPokemon')
@@ -186,9 +186,7 @@ export function PokemonSelect() {
                             titleButton='Visitar PokeBola'
                             onPress={handleLinkPokeBola}
                         />)}
-                    <TouchableOpacity onPress={handleLogOut}>
-                        <Text>AAA</Text>
-                    </TouchableOpacity>
+
 
                 </Container>
 

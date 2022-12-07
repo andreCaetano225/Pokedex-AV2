@@ -26,6 +26,9 @@ export const ContainerFlexSearch = styled(SafeAreaView)`
     align-items: center;
     justify-content: center;
 
+    margin-top: -50px;
+
+
 
 
 `
@@ -62,6 +65,7 @@ export const ButtonSubmit = styled.View`
 
     border: 1px solid #000;
     border-left: 1px solid #FFE031;
+
 `
 
 
@@ -82,6 +86,4 @@ export const InputSearch = styled.TextInput`
     padding-left: 20px;
 
 `;
-
-
 

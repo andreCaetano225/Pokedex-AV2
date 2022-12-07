@@ -1,8 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Image, ImageBackground } from 'react-native';
 import { Button } from '../../components/Button';
 import { useNavigation } from '@react-navigation/native'
 import { Container, InputUser, } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 export function HomePage() {
@@ -11,10 +13,21 @@ export function HomePage() {
 
     const navigation = useNavigation();
 
-    function handleNewPokedex() {
-        navigation.navigate('pokemonSelect', { user })
-        setUser('')
+    async function handleNewPokedex() {
+        if (user == '') {
+            alert('Por favor insira o nome de treinador ')
+        } else {
+            navigation.navigate('pokemonSelect')
+
+            await AsyncStorage.setItem('@user', JSON.stringify(user))
+            setUser('')
+        }
+
     }
+
+    useEffect(() => {
+
+    }, [user])
 
 
     return (

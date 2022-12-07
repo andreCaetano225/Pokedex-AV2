@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRoute } from '@react-navigation/native'
-import { Image, ImageBackground, Keyboard, KeyboardAvoidingView } from 'react-native';
+import { Image, ImageBackground, Keyboard, KeyboardAvoidingView, Text, TouchableOpacity } from 'react-native';
 import { ButtonSubmit, Container, ContainerFlexSearch, ContainerImg, InputSearch, TextPokemon, TextWelcome } from './styles';
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Button } from '../../components/Button';
@@ -34,6 +34,7 @@ interface ItensPokemon {
 export function PokemonSelect() {
     const [apiResults, setApiResults] = useState<ApiResults>();
     const [valueInputPoke, setvalueInputPoke] = useState('');
+    const [userName, setUserName] = useState('');
 
     const [pokemonSaveName, setPokemonSaveName] = useState<string>('');
     const [pokemonSaveImg, setPokemonSaveImg] = useState<string>('');
@@ -44,8 +45,24 @@ export function PokemonSelect() {
 
     const navigation = useNavigation();
 
-    const route = useRoute();
-    const { user } = route.params as RouteParams;
+    // const route = useRoute();
+    // const { user } = route.params as RouteParams;
+
+
+    async function fetchPokemons() {
+        try {
+
+            const dataName = await AsyncStorage.getItem('@user');
+
+            const name = dataName ? JSON.parse(dataName) : ''
+            setUserName(name)
+
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
 
@@ -57,7 +74,9 @@ export function PokemonSelect() {
 
         setPokemonSaveName(`${apiResults?.name?.toUpperCase()}`)
         setPokemonSaveImg(`${apiResults?.sprites?.other?.home?.front_default}`)
-    }, [apiResults, pressInput, valueInputPoke])
+
+        fetchPokemons();
+    }, [apiResults, pressInput, valueInputPoke, userName])
 
 
 
@@ -92,6 +111,12 @@ export function PokemonSelect() {
         setButtonSave(false)
     }
 
+    async function handleLogOut() {
+        await AsyncStorage.removeItem('@user');
+        await AsyncStorage.removeItem('pokemon-name');
+        await AsyncStorage.removeItem('pokemon-img');
+    }
+
     function handleLinkPokeBola() {
         navigation.navigate('ListPokemon')
     }
@@ -118,7 +143,7 @@ export function PokemonSelect() {
                         (null) :
                         (
                             <TextWelcome>
-                                Seja bem vindo {user}
+                                Seja bem vindo {userName}
                             </TextWelcome>
                         )}
                 </TextWelcome>
@@ -142,6 +167,7 @@ export function PokemonSelect() {
                         </ButtonSubmit>
                     </ContainerFlexSearch>
 
+
                     {buttonSave ?
                         (
                             <Button
@@ -160,7 +186,9 @@ export function PokemonSelect() {
                             titleButton='Visitar PokeBola'
                             onPress={handleLinkPokeBola}
                         />)}
-
+                    <TouchableOpacity onPress={handleLogOut}>
+                        <Text>AAA</Text>
+                    </TouchableOpacity>
 
                 </Container>
 

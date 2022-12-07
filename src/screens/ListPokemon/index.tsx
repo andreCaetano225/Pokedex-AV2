@@ -48,7 +48,7 @@ export function ListPokemon() {
     }, [pokemonNome, pokemonImg])
 
     function handlePopTop() {
-        navigation.popToTop();
+        navigation.navigate('pokemonSelect');
     }
 
     return (

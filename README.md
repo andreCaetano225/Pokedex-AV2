@@ -37,6 +37,7 @@ $ Yarn: https://yarnpkg.com/
 $ Clone o reposítorio
 $ cd Pokedex-AV2
 $ yarn / yarn install
+$ npx expo install @expo/webpack-config@^0.17.2
 $ expo / npx expo start
 ```
 
